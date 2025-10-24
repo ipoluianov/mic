@@ -17,6 +17,9 @@ func main() {
 		return
 	}
 
+	fmt.Println("Waiting")
+	time.Sleep(1 * time.Second)
+
 	resp, err := mic.ReadFromDeviceWithTimeout("/dev/uhid1", 64, 2*time.Second)
 	if err != nil {
 		fmt.Println("ReadFromDeviceWithTimeout error:", err)

@@ -26,8 +26,8 @@ func WriteToDevice(devPath string, data []byte) (int, error) {
 
 	packetSize := len(data)
 
-	out := make([]byte, packetSize+1)
-	copy(out[1:], data)
+	out := make([]byte, packetSize)
+	copy(out, data)
 	fmt.Println("Write:", hex.EncodeToString(out))
 	n, err := f.Write(out)
 	if err != nil {
