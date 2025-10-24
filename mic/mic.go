@@ -54,7 +54,7 @@ func ThReadContinuous(devPath string) {
 			fmt.Println("Open file success - READ")
 		}
 
-		fmt.Println("Reading ...")
+		//fmt.Println("Reading ...")
 		n, err := f.Read(in)
 		if err == nil && n > 0 {
 			fmt.Println("RCV:", hex.EncodeToString(in))
