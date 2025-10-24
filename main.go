@@ -16,7 +16,6 @@ func main() {
 		_, err := mic.WriteToDevice("/dev/uhid1", mic.MakeRequestADCFrame())
 		if err != nil {
 			fmt.Println("WriteToDevice error:", err)
-			return
 		}
 
 		//fmt.Println("Waiting")

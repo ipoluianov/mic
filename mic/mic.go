@@ -39,22 +39,30 @@ func WriteToDevice(devPath string, data []byte) (int, error) {
 }
 
 func ThReadContinuous(devPath string) {
-	f, err := os.OpenFile(devPath, os.O_RDONLY, 0)
-	if err != nil {
-		fmt.Println("OpenFile error:", err)
-		return
-	}
-	defer f.Close()
-	fmt.Println("Open file success")
-	// Читаем ответ с таймаутом
 	in := make([]byte, 64)
+	var err error
+	var f *os.File
+	// Читаем ответ с таймаутом
 	//timeout := 1 * time.Second
 
 	for {
+		if f == nil {
+			f, err = os.OpenFile(devPath, os.O_RDONLY, 0)
+			if err != nil {
+				fmt.Println("OpenFile error:", err)
+				return
+			}
+			fmt.Println("Open file success")
+		}
+
 		fmt.Println("Reading ...")
 		n, err := f.Read(in)
 		if err == nil && n > 0 {
 			fmt.Println("Read1:", hex.EncodeToString(in))
+		} else {
+			fmt.Println("Read error:", err)
+			f.Close()
+			f = nil
 		}
 	}
 }
