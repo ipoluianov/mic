@@ -9,7 +9,6 @@ import (
 )
 
 func WriteToDevice(devPath string, data []byte) (int, error) {
-
 	f, err := os.OpenFile(devPath, os.O_WRONLY, 0)
 	if err != nil {
 		fmt.Println("OpenFile error:", err)
@@ -55,7 +54,7 @@ func ThReadContinuous(devPath string) {
 		fmt.Println("Reading ...")
 		n, err := f.Read(in)
 		if err == nil && n > 0 {
-			fmt.Printf("Read:", hex.EncodeToString(in))
+			fmt.Printf("Read1:", hex.EncodeToString(in))
 		}
 	}
 }
