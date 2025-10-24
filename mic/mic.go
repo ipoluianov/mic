@@ -27,7 +27,7 @@ func NewMicapController() *MicapController {
 
 func (c *MicapController) Start() {
 	for _, path := range c.devicePaths {
-		c.ThReadContinuous(path)
+		go c.ThReadContinuous(path)
 	}
 	go c.ThRequestStatus()
 }
