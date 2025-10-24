@@ -1,6 +1,7 @@
 package mic
 
 import (
+	"encoding/hex"
 	"fmt"
 	"os"
 	"syscall"
@@ -8,6 +9,8 @@ import (
 )
 
 func WriteToDevice(devPath string, data []byte) (int, error) {
+	fmt.Println("Write:", hex.EncodeToString(data))
+
 	f, err := os.OpenFile(devPath, os.O_RDWR, 0)
 	if err != nil {
 		fmt.Println("OpenFile error:", err)
