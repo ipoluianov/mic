@@ -17,6 +17,8 @@ type MicapController struct {
 	activeDeviceIndex int
 
 	devicePaths []string
+
+	version string
 }
 
 func NewMicapController() *MicapController {
@@ -171,7 +173,8 @@ func (c *MicapController) ParseFrame(data []byte, pathToDevice string) {
 	if cmd == 1101 { // 0x044D
 		// version response
 		version := binary.LittleEndian.Uint16(data[20:])
-		fmt.Println("MICAP Version:", fmt.Sprintf("0x%04X", version))
+		// fmt.Println("MICAP Version:", fmt.Sprintf("0x%04X", version))
+		c.version = fmt.Sprintf("0x%04X", version)
 		processed = true
 	}
 
