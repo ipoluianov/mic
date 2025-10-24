@@ -50,9 +50,9 @@ func ThReadContinuous(devPath string) {
 			f, err = os.OpenFile(devPath, os.O_RDONLY, 0)
 			if err != nil {
 				fmt.Println("OpenFile error:", err)
-				return
+				continue
 			}
-			fmt.Println("Open file success")
+			fmt.Println("Open file success - READ")
 		}
 
 		fmt.Println("Reading ...")
