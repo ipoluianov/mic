@@ -33,7 +33,7 @@ func (c *MicFrame) ToBytes() []byte {
 func MakeRequestVersionFrame() []byte {
 	var fr MicFrame
 	fr.MICAPCommand = 1101
-	fr.InTransferCount = 0
+	fr.InTransferCount = 2
 	return fr.ToBytes()
 }
 
