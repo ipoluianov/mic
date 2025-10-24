@@ -139,7 +139,6 @@ func ReadFromDeviceWithTimeout(devPath string, packetSize int, timeout time.Dura
 
 func FindMicapDevice() (filePath string, version string) {
 	listOfDevices := []string{"/dev/uhid0", "/dev/uhid1", "/dev/uhid2", "/dev/uhid3", "/dev/uhid4", "/dev/uhid5"}
-
 	for _, devPath := range listOfDevices {
 		fmt.Println("try", devPath)
 		_, err := os.Stat(devPath)
@@ -150,6 +149,7 @@ func FindMicapDevice() (filePath string, version string) {
 			if err == nil {
 				v := binary.LittleEndian.Uint16(response[20:])
 				fmt.Println("Recevied version:", fmt.Sprintf("0x%04X", v))
+				return devPath, fmt.Sprintf("0x%04X", v)
 			}
 		}
 	}
