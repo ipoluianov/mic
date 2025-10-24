@@ -2,7 +2,6 @@ package mic
 
 import (
 	"encoding/binary"
-	"encoding/hex"
 	"fmt"
 	"os"
 	"sync"
@@ -95,7 +94,7 @@ func (c *MicapController) WriteToDevice(data []byte) (int, error) {
 
 	out := make([]byte, packetSize)
 	copy(out, data)
-	fmt.Println("SND:", hex.EncodeToString(out))
+	//fmt.Println("SND:", hex.EncodeToString(out))
 	n, err := f.Write(out)
 	if err != nil {
 		fmt.Println("Write error:", err)
@@ -124,7 +123,7 @@ func (c *MicapController) ThReadContinuous(devPath string) {
 
 		n, err := f.Read(in)
 		if err == nil && n > 0 {
-			fmt.Println("RCV:", hex.EncodeToString(in))
+			//fmt.Println("RCV:", hex.EncodeToString(in))
 			c.ParseFrame(in, devPath)
 		} else {
 			//fmt.Println("Read error:", err)
