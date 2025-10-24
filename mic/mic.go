@@ -61,6 +61,7 @@ func ThReadContinuous(devPath string) {
 		n, err := f.Read(in)
 		if err == nil && n > 0 {
 			fmt.Println("RCV:", hex.EncodeToString(in))
+			ParseFrame(in)
 		} else {
 			fmt.Println("Read error:", err)
 			f.Close()
