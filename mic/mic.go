@@ -112,10 +112,10 @@ func (c *MicapController) ThReadContinuous(devPath string) {
 		if f == nil {
 			f, err = os.OpenFile(devPath, os.O_RDONLY, 0)
 			if err != nil {
-				//fmt.Println("OpenFile error:", err)
+				fmt.Println("OpenFile error:", err)
 				continue
 			}
-			//fmt.Println("Open file success - READ")
+			fmt.Println("Open file success - READ")
 		}
 
 		n, err := f.Read(in)
