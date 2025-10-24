@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/hex"
 	"fmt"
 	"time"
 
@@ -11,6 +10,8 @@ import (
 func main() {
 	fmt.Println("Started")
 
+	go mic.ThReadContinuous("/dev/uhid1")
+
 	_, err := mic.WriteToDevice("/dev/uhid1", mic.MakeRequestADCFrame())
 	if err != nil {
 		fmt.Println("WriteToDevice error:", err)
@@ -18,9 +19,9 @@ func main() {
 	}
 
 	fmt.Println("Waiting")
-	time.Sleep(1 * time.Second)
+	time.Sleep(5 * time.Second)
 
-	resp, err := mic.ReadFromDeviceWithTimeout("/dev/uhid1", 64, 2*time.Second)
+	/*resp, err := mic.ReadFromDeviceWithTimeout("/dev/uhid1", 64, 2*time.Second)
 	if err != nil {
 		fmt.Println("ReadFromDeviceWithTimeout error:", err)
 		return
@@ -28,5 +29,5 @@ func main() {
 
 	fmt.Println("Response", hex.EncodeToString(resp))
 
-	fmt.Println("Finished")
+	fmt.Println("Finished")*/
 }
