@@ -9,8 +9,8 @@ import (
 
 func main() {
 	fmt.Println("Started")
-
-	mic.FindMicapDevice()
+	filePath, version := mic.FindMicapDevice()
+	fmt.Printf("Found MICAP device: %s, version: %s\n", filePath, version)
 
 	return
 

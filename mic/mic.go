@@ -141,6 +141,7 @@ func FindMicapDevice() (filePath string, version string) {
 	listOfDevices := []string{"/dev/uhid0", "/dev/uhid1", "/dev/uhid2", "/dev/uhid3", "/dev/uhid4", "/dev/uhid5"}
 
 	for _, devPath := range listOfDevices {
+		fmt.Println("try", devPath)
 		_, err := os.Stat(devPath)
 		if err == nil {
 			fmt.Println("Device found:", devPath)
