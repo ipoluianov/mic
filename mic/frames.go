@@ -30,10 +30,10 @@ func (c *MicFrame) ToBytes() []byte {
 	return frame
 }
 
-func MakeRequestADCFrame() []byte {
+func MakeRequestVersionFrame() []byte {
 	var fr MicFrame
-	fr.MICAPCommand = 1103
-	fr.InTransferCount = 16
+	fr.MICAPCommand = 1101
+	fr.InTransferCount = 0
 	return fr.ToBytes()
 }
 
@@ -41,5 +41,12 @@ func MakeRequestSystemStatusFrame() []byte {
 	var fr MicFrame
 	fr.MICAPCommand = 1102
 	fr.InTransferCount = 22
+	return fr.ToBytes()
+}
+
+func MakeRequestADCFrame() []byte {
+	var fr MicFrame
+	fr.MICAPCommand = 1103
+	fr.InTransferCount = 16
 	return fr.ToBytes()
 }

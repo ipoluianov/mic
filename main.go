@@ -10,6 +10,10 @@ import (
 func main() {
 	fmt.Println("Started")
 
+	mic.FindMicapDevice()
+
+	return
+
 	go mic.ThReadContinuous("/dev/uhid1")
 
 	for i := 0; i < 10000; i++ {

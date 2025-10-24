@@ -77,13 +77,13 @@ func ParseFrame(data []byte) {
 	}
 
 	cmd := binary.LittleEndian.Uint16(data[0:])
-	if cmd == 1103 {
+	if cmd == 1103 { // 0x044F
 		for i := 0; i < 8; i++ {
 			STATUS.ADC[i] = binary.LittleEndian.Uint16(data[20+i*2:])
 		}
 	}
 
-	if cmd == 1102 {
+	if cmd == 1102 { // 0x044E
 		offset := 20
 		STATUS.SYSTEM.TIMING.IsT0_Done = data[offset+0]
 		STATUS.SYSTEM.TIMING.IsT1_Done = data[offset+1]
@@ -135,4 +135,18 @@ func ReadFromDeviceWithTimeout(devPath string, packetSize int, timeout time.Dura
 		time.Sleep(10 * time.Millisecond)
 	}
 	return in, nil
+}
+
+func FindMicapDevice() {
+	listOfDevices := []string{"/dev/uhid1", "/dev/uhid2", "/dev/uhid3", "/dev/uhid4", "/dev/uhid5"}
+
+	for _, devPath := range listOfDevices {
+		_, err := os.Stat(devPath)
+		if err == nil {
+			fmt.Println("Device found:", devPath)
+			WriteToDevice(devPath, MakeRequestVersionFrame())
+			ReadFromDeviceWithTimeout(devPath, 64, 1*time.Second)
+		}
+	}
+
 }
