@@ -12,7 +12,8 @@ func main() {
 
 	go mic.ThReadContinuous("/dev/uhid1")
 
-	for {
+	for i := 0; i < 10000; i++ {
+		fmt.Println("Iteration", i)
 		_, err := mic.WriteToDevice("/dev/uhid1", mic.MakeRequestADCFrame())
 		if err != nil {
 			fmt.Println("WriteToDevice error:", err)
