@@ -39,6 +39,13 @@ func WriteToDevice(devPath string, data []byte) (int, error) {
 }
 
 func ReadFromDeviceWithTimeout(devPath string, packetSize int, timeout time.Duration) ([]byte, error) {
+	f, err := os.OpenFile(devPath, os.O_RDWR, 0)
+	if err != nil {
+		fmt.Println("OpenFile error:", err)
+		return nil, err
+	}
+	defer f.Close()
+	fmt.Println("Open file success")
 	// Читаем ответ с таймаутом
 	in := make([]byte, packetSize)
 	//timeout := 1 * time.Second
