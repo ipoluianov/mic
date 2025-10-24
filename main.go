@@ -14,7 +14,7 @@ func main() {
 
 	for i := 0; i < 10000; i++ {
 		fmt.Println("Iteration", i)
-		_, err := mic.WriteToDevice("/dev/uhid1", mic.MakeRequestADCFrame())
+		_, err := mic.WriteToDevice("/dev/uhid1", mic.MakeRequestSystemStatusFrame())
 		if err != nil {
 			fmt.Println("WriteToDevice error:", err)
 		}

@@ -36,3 +36,10 @@ func MakeRequestADCFrame() []byte {
 	fr.InTransferCount = 16
 	return fr.ToBytes()
 }
+
+func MakeRequestSystemStatusFrame() []byte {
+	var fr MicFrame
+	fr.MICAPCommand = 1102
+	fr.InTransferCount = 22
+	return fr.ToBytes()
+}
