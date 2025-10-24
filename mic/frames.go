@@ -33,6 +33,6 @@ func (c *MicFrame) ToBytes() []byte {
 func MakeRequestADCFrame() []byte {
 	var fr MicFrame
 	fr.MICAPCommand = 1103
-	fr.InTransferCount = 10
+	fr.InTransferCount = 16
 	return fr.ToBytes()
 }
