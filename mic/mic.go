@@ -35,7 +35,7 @@ func (c *MicapController) Start() {
 
 func (c *MicapController) ThRequestStatus() {
 	for {
-		fmt.Println("ThRequestStatus")
+		fmt.Println("ThRequestStatus", time.Now(), "ActiveDevicePath:", c.GetActiveDevicePath(), "Version:", c.version)
 		_, err := c.WriteToDevice(MakeRequestVersionFrame())
 		if err != nil {
 			fmt.Println("WriteToDevice error:", err)
