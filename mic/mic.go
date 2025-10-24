@@ -9,7 +9,6 @@ import (
 )
 
 func WriteToDevice(devPath string, data []byte) (int, error) {
-	fmt.Println("Write:", hex.EncodeToString(data))
 
 	f, err := os.OpenFile(devPath, os.O_RDWR, 0)
 	if err != nil {
@@ -28,9 +27,8 @@ func WriteToDevice(devPath string, data []byte) (int, error) {
 	packetSize := len(data)
 
 	out := make([]byte, packetSize+1)
-	for i := range out {
-		out[i+1] = byte(i)
-	}
+	copy(out[1:], data)
+	fmt.Println("Write:", hex.EncodeToString(out))
 	n, err := f.Write(out)
 	if err != nil {
 		fmt.Println("Write error:", err)
