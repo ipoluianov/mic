@@ -13,6 +13,8 @@ type MicFrame struct {
 	Var_3            uint16
 	Var_4            uint16
 	Var_5            uint16
+
+	Data [44]byte
 }
 
 func (c *MicFrame) ToBytes() []byte {
