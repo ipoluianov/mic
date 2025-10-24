@@ -148,7 +148,7 @@ func FindMicapDevice() (filePath string, version string) {
 			WriteToDevice(devPath, MakeRequestVersionFrame())
 			response, err := ReadFromDeviceWithTimeout(devPath, 64, 1*time.Second)
 			if err == nil {
-				v := binary.LittleEndian.Uint16(response[40:])
+				v := binary.LittleEndian.Uint16(response[20:])
 				fmt.Println("Recevied version:", fmt.Sprintf("0x%04X", v))
 			}
 		}

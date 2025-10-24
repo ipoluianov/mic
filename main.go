@@ -11,7 +11,6 @@ func main() {
 	fmt.Println("Started")
 	filePath, version := mic.FindMicapDevice()
 	fmt.Printf("Found MICAP device: %s, version: %s\n", filePath, version)
-
 	return
 
 	go mic.ThReadContinuous("/dev/uhid1")
