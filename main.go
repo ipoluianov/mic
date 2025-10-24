@@ -11,11 +11,11 @@ import (
 func main() {
 	fmt.Println("Started")
 
-	/*_, err := mic.WriteToDevice("/dev/uhid1", mic.MakeRequestADCFrame())
+	_, err := mic.WriteToDevice("/dev/uhid1", mic.MakeRequestADCFrame())
 	if err != nil {
 		fmt.Println("WriteToDevice error:", err)
 		return
-	}*/
+	}
 
 	resp, err := mic.ReadFromDeviceWithTimeout("/dev/uhid1", 64, 2*time.Second)
 	if err != nil {
