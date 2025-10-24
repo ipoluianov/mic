@@ -54,7 +54,7 @@ func ThReadContinuous(devPath string) {
 		fmt.Println("Reading ...")
 		n, err := f.Read(in)
 		if err == nil && n > 0 {
-			fmt.Printf("Read1:", hex.EncodeToString(in))
+			fmt.Println("Read1:", hex.EncodeToString(in))
 		}
 	}
 }
