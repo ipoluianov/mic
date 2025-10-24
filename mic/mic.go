@@ -10,7 +10,7 @@ import (
 
 func WriteToDevice(devPath string, data []byte) (int, error) {
 
-	f, err := os.OpenFile(devPath, os.O_RDWR, 0)
+	f, err := os.OpenFile(devPath, os.O_WRONLY, 0)
 	if err != nil {
 		fmt.Println("OpenFile error:", err)
 		return 0, err
