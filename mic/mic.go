@@ -82,6 +82,26 @@ func ParseFrame(data []byte) {
 			STATUS.ADC[i] = binary.LittleEndian.Uint16(data[20+i*2:])
 		}
 	}
+
+	if cmd == 1102 {
+		offset := 20
+		STATUS.SYSTEM.TIMING.IsT0_Done = data[offset+0]
+		STATUS.SYSTEM.TIMING.IsT1_Done = data[offset+1]
+		STATUS.SYSTEM.TIMING.IsT2_Done = data[offset+2]
+		STATUS.SYSTEM.TIMING.IsT3_Done = data[offset+3]
+		STATUS.SYSTEM.TIMING.IsT4_Done = data[offset+4]
+		STATUS.SYSTEM.TIMING.IsT5_Done = data[offset+5]
+		STATUS.SYSTEM.TIMING.IsT6_Done = data[offset+6]
+		STATUS.SYSTEM.TIMING.IsT7_Done = data[offset+7]
+		STATUS.SYSTEM.TIMING.IsT8_Done = data[offset+8]
+		STATUS.SYSTEM.TIMING.IsT9_Done = data[offset+9]
+		STATUS.SYSTEM.FLAGS = binary.LittleEndian.Uint32(data[offset+12:])
+		STATUS.SYSTEM.OPTICAL.Optical1 = binary.LittleEndian.Uint16(data[offset+16:])
+		STATUS.SYSTEM.OPTICAL.Optical2 = binary.LittleEndian.Uint16(data[offset+18:])
+		STATUS.SYSTEM.TEMPERATURE.Sensor1 = binary.LittleEndian.Uint16(data[offset+20:])
+		STATUS.SYSTEM.TEMPERATURE.Sensor2 = binary.LittleEndian.Uint16(data[offset+22:])
+	}
+
 }
 
 func ReadFromDeviceWithTimeout(devPath string, packetSize int, timeout time.Duration) ([]byte, error) {
