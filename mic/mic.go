@@ -1,12 +1,15 @@
 package mic
 
 import (
+	"encoding/binary"
 	"encoding/hex"
 	"fmt"
 	"os"
 	"syscall"
 	"time"
 )
+
+var STATUS Status
 
 func WriteToDevice(devPath string, data []byte) (int, error) {
 	f, err := os.OpenFile(devPath, os.O_WRONLY, 0)
@@ -62,6 +65,20 @@ func ThReadContinuous(devPath string) {
 			fmt.Println("Read error:", err)
 			f.Close()
 			f = nil
+		}
+	}
+}
+
+func ParseFrame(data []byte) {
+	if len(data) < 64 {
+		fmt.Println("ParseFrame: data too short")
+		return
+	}
+
+	cmd := binary.LittleEndian.Uint16(data[0:])
+	if cmd == 1103 {
+		for i := 0; i < 8; i++ {
+			STATUS.ADC[i] = binary.LittleEndian.Uint16(data[20+i*2:])
 		}
 	}
 }

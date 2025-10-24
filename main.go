@@ -19,7 +19,10 @@ func main() {
 			fmt.Println("WriteToDevice error:", err)
 		}
 
-		//fmt.Println("Waiting")
+		fmt.Println("Status:")
+		for j := 0; j < 8; j++ {
+			fmt.Printf(" ADC[%d] = %d\n", j, mic.STATUS.ADC[j])
+		}
 		time.Sleep(1 * time.Second)
 	}
 
