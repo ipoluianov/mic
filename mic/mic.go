@@ -15,7 +15,6 @@ func WriteToDevice(devPath string, data []byte) (int, error) {
 		return 0, err
 	}
 	defer f.Close()
-	fmt.Println("Open file success")
 
 	fd := int(f.Fd())
 	if err := syscall.SetNonblock(fd, true); err != nil {
@@ -27,13 +26,13 @@ func WriteToDevice(devPath string, data []byte) (int, error) {
 
 	out := make([]byte, packetSize)
 	copy(out, data)
-	fmt.Println("Write:", hex.EncodeToString(out))
+	fmt.Println("SND:", hex.EncodeToString(out))
 	n, err := f.Write(out)
 	if err != nil {
 		fmt.Println("Write error:", err)
 		return 0, err
 	}
-	fmt.Printf("Sent %d bytes\n", n)
+	//fmt.Printf("Sent %d bytes\n", n)
 
 	return n, nil
 }
@@ -58,7 +57,7 @@ func ThReadContinuous(devPath string) {
 		fmt.Println("Reading ...")
 		n, err := f.Read(in)
 		if err == nil && n > 0 {
-			fmt.Println("Read1:", hex.EncodeToString(in))
+			fmt.Println("RCV:", hex.EncodeToString(in))
 		} else {
 			fmt.Println("Read error:", err)
 			f.Close()
